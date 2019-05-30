@@ -65,7 +65,8 @@ class QuestionnaireWDSController extends Controller
             "SELECT *
         FROM reponses
         WHERE reponses.id_question
-        IN (" . implode(', ', $resultatquestionid) . ")"
+        IN (" . implode(', ', $resultatquestionid) . ")
+        ORDER BY RAND()"
         );
         $request->session()->put('reponses', $reponses);
 

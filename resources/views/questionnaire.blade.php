@@ -12,11 +12,15 @@
             <form>
                 @csrf
                 <ul>
-                    <div class="mb-3">
+                    <div class="mb-3 infoscandidat">
                         <li class="mb-0"><label for="email">Adresse e-mail</label><br>
                             <input class="mt-0" type="email" name="email"/></li>
+                    </div>
+                    <div class="infoscandidat">
                         <li class="mb-0"><label for="nom">NOM</label><br>
                             <input class="mt-0" type="text" name="nom"/></li>
+                    </div>
+                    <div class="infoscandidat">
                         <li class="mb-0"><label for="prenom">Prénom</label><br>
                             <input class="mt-0" type="text" name="prenom"/></li>
                     </div>
@@ -51,29 +55,55 @@
     var button = document.getElementById('valider');
     button.onclick = function () {
         var valide;
-        var reponses = document.getElementsByClassName('reponses');
-        for (let reponse of reponses) {
+
+        var infoscandidat = document.getElementsByClassName('infoscandidat');
+
+        for (let infocandidat of infoscandidat) {
             valide = false;
-            var inputs = reponse.querySelectorAll('.reponses input');
+            var inputs = infocandidat.querySelectorAll('.infoscandidat input')
             inputs.forEach((input) => {
-                if (input.checked) {
-                    valide = true;
+                if (!input.value == "" || !input.value == null) {
+                    valide = true   ;
                 }
-            if (valide === false) {
-                reponse.parentNode.previousSibling.previousSibling.setAttribute("id", "requis");
-                return;
-            } else {
-                return;
-            }
             });
+            if (valide === false) {
+                console.log(infocandidat);
+                console.log(infocandidat.firstChild);
+                infocandidat.firstElementChild.firstElementChild.setAttribute("id", "requis");
+            }
         }
+
+        var reponses = document.getElementsByClassName('reponses');
+
+        for (let unereponse of reponses) {
+            valide = false;
+            var inputs = unereponse.querySelectorAll('.reponses input');
+            inputs.forEach((input) => {
+                console.log(input);
+                if (input.getAttribute("type") === "checkbox" || input.getAttribute("type") === "radio") {
+                    if (input.checked) {
+                        valide = true;
+                    }
+                } else {
+                    if (!input.value == "" || !input.value == null) {
+                        valide = true   ;
+                    }
+                }
+            });
+            if (valide === false) {
+                unereponse.parentNode.previousSibling.previousSibling.setAttribute("id", "requis");
+            }
+        }
+
         if (valide) {
             console.log('succès');
         } else {
             console.log('erreur');
-            document.getElementById("requis").scrollIntoView({behavior:"smooth"});
+            requis = document.getElementById("requis");
+            requis.scrollIntoView({behavior:"smooth"});
+            requis.insertAdjacentHTML("beforeend", "<span class='requis'> *</span>");
         }
-        document.getElementById("requis").removeAttribute("id");
+        requis.removeAttribute("id");
     }
 </script>
 @endsection
