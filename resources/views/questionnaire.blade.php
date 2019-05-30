@@ -68,7 +68,7 @@
             var inputs = infocandidat.querySelectorAll('.infoscandidat input')
             inputs.forEach((input) => {
                 if (!input.value == "" || !input.value == null) {
-                    valide = true   ;
+                    valide = true;
                 }
             });
             if (valide === false) {
@@ -90,7 +90,7 @@
                     }
                 } else {
                     if (!input.value == "" || !input.value == null) {
-                        valide = true   ;
+                        valide = true;
                     }
                 }
             });
