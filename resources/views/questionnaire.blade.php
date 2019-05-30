@@ -1,8 +1,8 @@
-@extends('templatequestionnaire')
+@extends("templatequestionnaire")
 
-@section('titre', 'Questionnaire '.$titre)
+@section("titre", "Questionnaire ".$titre)
 
-@section('contenuquestionnaire')
+@section("contenuquestionnaire")
 
 <h1 class="pt-4 pb-3">Questionnaire {{ $questionnaire->nom }}</h1>
 
@@ -24,12 +24,12 @@
                         <li class="mb-0"><label for="prenom">Prénom</label><br>
                             <input class="mt-0" type="text" name="prenom"/></li>
                     </div>
-                    @foreach ($request->session()->get('questions') as $unequestion)
+                    @foreach ($request->session()->get("questions") as $unequestion)
                     <div class="mb-2">
                     <li class="mb-2" class="questions">{{ $unequestion->intitule_question }}</li>
                     <li>
                         <ul class="reponses">
-                            @foreach ($request->session()->get('reponses') as $unereponse)
+                            @foreach ($request->session()->get("reponses") as $unereponse)
                             @if ($unequestion->id_question == $unereponse->id_question)
                             <li><input type="{{ $unequestion->type }}" name="{{ $unequestion->id_question }}[]"
                                 value="{{ $unereponse->id_reponse }}"/>
@@ -58,14 +58,13 @@
 
         var infoscandidat = document.getElementsByClassName('infoscandidat');
 
-        if (document.getElementById("requis")) {
-            const supprimerRequis = (requis) => requis.forEach(element => element.remove());
-            supprimerRequis(document.querySelectorAll(".requis"));
-        }
+        document.getElementById("requis");
+        const supprimerRequis = (requis) => requis.forEach(element => element.remove());
+        supprimerRequis(document.querySelectorAll(".requis"));
 
         for (let infocandidat of infoscandidat) {
             valide = false;
-            var inputs = infocandidat.querySelectorAll('.infoscandidat input')
+            var inputs = infocandidat.querySelectorAll(".infoscandidat input")
             inputs.forEach((input) => {
                 if (!input.value == "" || !input.value == null) {
                     valide = true;
@@ -78,11 +77,11 @@
             }
         }
 
-        var reponses = document.getElementsByClassName('reponses');
+        var reponses = document.getElementsByClassName("reponses");
 
         for (let unereponse of reponses) {
             valide = false;
-            var inputs = unereponse.querySelectorAll('.reponses input');
+            var inputs = unereponse.querySelectorAll(".reponses input");
             inputs.forEach((input) => {
                 if (input.getAttribute("type") === "checkbox" || input.getAttribute("type") === "radio") {
                     if (input.checked) {
