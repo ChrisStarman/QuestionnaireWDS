@@ -58,6 +58,11 @@
 
         var infoscandidat = document.getElementsByClassName('infoscandidat');
 
+        if (document.getElementById("requis")) {
+            const supprimerRequis = (requis) => requis.forEach(element => element.remove());
+            supprimerRequis(document.querySelectorAll(".requis"));
+        }
+
         for (let infocandidat of infoscandidat) {
             valide = false;
             var inputs = infocandidat.querySelectorAll('.infoscandidat input')
@@ -79,7 +84,6 @@
             valide = false;
             var inputs = unereponse.querySelectorAll('.reponses input');
             inputs.forEach((input) => {
-                console.log(input);
                 if (input.getAttribute("type") === "checkbox" || input.getAttribute("type") === "radio") {
                     if (input.checked) {
                         valide = true;
