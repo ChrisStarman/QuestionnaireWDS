@@ -53,7 +53,7 @@
 @section('script')
 <script>
     var button = document.getElementById('valider');
-    button.onclick = function () {
+    button.onclick = function() {
         var valide;
 
         var infoscandidat = document.getElementsByClassName('infoscandidat');
